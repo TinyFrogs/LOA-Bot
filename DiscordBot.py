@@ -17,6 +17,10 @@ async def on_ready():
 async def 시발(ctx):
     await ctx.send("욕하지마 시발 :thumbsup:")
 
+
+
+
+
 #하드 + 헬
 @bot.command()
 async def 회랑1(ctx, num1, num2):
@@ -81,8 +85,6 @@ async def 회랑(ctx, num1):
 
     await ctx.send(embed=embeded)
 
-
-
 @bot.command()
 async def test123(ctx):
     print("테스트")
@@ -103,6 +105,17 @@ async def test123(ctx):
     print("테스트5")
     await ctx.send(embed=embed)
     print("test end")
+
+
+@bot.command()
+async def 쿠크(ctx):
+    embed = discord.Embed(title="쿠크 파티", description="쿠크 파티", colour=0x008080)
+    embed.add_field(name="각두", value="기상", inline=True)
+    embed.add_field(name="워로", value="홀나", inline=True)
+    embed.add_field(name="홀카", value="인파", inline=True)
+    embed.add_field(name="카멜", value="워로", inline=True)
+
+    await ctx.send(embed=embeded)
 
 
 @bot.event
