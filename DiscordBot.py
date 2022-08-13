@@ -126,4 +126,4 @@ async def on_command_error(ctx, error):
         await ctx.send("https://tenor.com/view/%EB%AA%B0%EB%A3%A8-gif-23066933")
 
 access_token = os.environ["BOT_TOKEN"]
-bot.run('MTAwMzQ2MDM2NzM2NTcwMTY3Mw.Gc_p7O.Fwrx3sA9TS3e7oLaOlad9vIT7XjJlAkwWLeLMY')
+bot.run(access_token)
