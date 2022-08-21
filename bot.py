@@ -13,10 +13,6 @@ async def on_ready():
     print("We have loggedd in as {0.user}".format(bot))
     await bot.change_presence(status=discord.Status.online, activity=discord.Game("$명령어"))
 
-@bot.command()
-async def 시발(ctx):
-    await ctx.send("욕하지마 시발 :thumbsup:")
-
 #하드 + 헬
 @bot.command()
 async def 회랑헬(ctx, num1, num2):
