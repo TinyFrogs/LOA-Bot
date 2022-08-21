@@ -145,7 +145,6 @@ async def 명령어(ctx):
 async def 서버(ctx):
     name = str(ctx.guild.name)
     description = str(ctx.guild.description)
-    owner = str(ctx.guild.owner)
     id = str(ctx.guild.id)
     memberCount = str(ctx.guild.member_count)
     icon = str("https://cdn.discordapp.com/attachments/867400582392971295/984722367072837642/image0.jpg")
@@ -157,7 +156,7 @@ async def 서버(ctx):
     )
     print("서버5")
     embed.set_thumbnail(url=icon)
-    embed.add_field(name="주인장", value=owner, inline=True)
+    embed.add_field(name="주인장", value="아줌마", inline=True)
     embed.add_field(name="서버 ID", value=id, inline=True)
     embed.add_field(name="멤버 수", value=memberCount, inline=True)
 
