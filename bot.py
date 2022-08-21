@@ -51,7 +51,6 @@ async def 회랑헬(ctx, num1, num2):
 
     await ctx.send(embed=embeded)
 
-
 #하드
 @bot.command()
 async def 회랑(ctx, num1):
@@ -81,7 +80,6 @@ async def 회랑(ctx, num1):
     embeded.add_field(name="10레벨:ring:", value=jewels[7], inline=True)
 
     await ctx.send(embed=embeded)
-
 
 @bot.command()
 async def 쿠크(ctx):
@@ -142,6 +140,28 @@ async def 명령어(ctx):
     await dm_channel.send(embed=embed)
     await dm_channel.send(
         "https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
+
+@bot.command()
+async def 서버(ctx):
+    name = str(ctx.guild.name)
+    description = str(ctx.guild.description)
+    owner = str(ctx.guild.owner)
+    id = str(ctx.guild.id)
+    memberCount = str(ctx.guild.member_count)
+    icon = str("https://cdn.discordapp.com/attachments/867400582392971295/984722367072837642/image0.jpg")
+    print("서버4")
+    embed = discord.Embed(
+        title=name + " 서버 정보",
+        description=description,
+        colour=discord.Color.green()
+    )
+    print("서버5")
+    embed.set_thumbnail(url=icon)
+    embed.add_field(name="주인장", value=owner, inline=True)
+    embed.add_field(name="서버 ID", value=id, inline=True)
+    embed.add_field(name="멤버 수", value=memberCount, inline=True)
+
+    await ctx.send(embed=embed)
 
 @bot.event
 async def on_command_error(ctx, error):
