@@ -151,6 +151,7 @@ class MyView(View):
         embed.add_field(name="홀홀카", value="인파 | 아가 | 블레 | 리퍼", inline=False)
         embed.add_field(name="카카멜", value="워로 | 충동 | 아가 | 배마", inline=False)
 
+        await self.ctx.send(embed=embed)
         await interaction.response.edit_message(embed=embed)
         self.clear_items()
 
@@ -191,6 +192,7 @@ class MyView(View):
         embed.add_field(name="서버 ID", value=id, inline=True)
         embed.add_field(name="멤버 수", value=memberCount, inline=True)
 
+        await self.ctx.send(embed=embed)
         self.clear_items()
         await interaction.response.edit_message(embed=embed)
 
