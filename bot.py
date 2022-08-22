@@ -6,15 +6,19 @@ from discord.ext import commands
 from discord.utils import get
 from discord.ui import Button, View
 
-bot = commands.Bot(command_prefix="$")
+intents = discord.Intents.all()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix="$", intents=intents)
 
 
 @bot.event
 async def on_ready():
-    print("We have loggedd in as {0.user}".format(bot))
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game("$명령어"))
+    print("We have logged in as {0.user}".format(bot))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game("$기능"))
 
-#하드 + 헬
+
+# 하드 + 헬
 @bot.command()
 async def 회랑헬(ctx, num1, num2):
     icon_hell_url = str("https://media.discordapp.net/attachments/1010932575403003974/1010934804818174022/unknown.png")
@@ -52,10 +56,10 @@ async def 회랑헬(ctx, num1, num2):
 
     await ctx.send(embed=embeded)
 
-#하드
+# 하드
 @bot.command()
 async def 회랑(ctx, num1):
-    icon_nomal_url=str("https://cdn.discordapp.com/attachments/1010932575403003974/1010934821276618825/unknown.png")
+    icon_nomal_url = str("https://cdn.discordapp.com/attachments/1010932575403003974/1010934821276618825/unknown.png")
     jewel = [0, 0, 0, 0, 0, 0, 0, 0]
     jewels = list(map(int, jewel))
 
@@ -84,7 +88,9 @@ async def 회랑(ctx, num1):
 
 @bot.command()
 async def 배위(ctx):
-    await ctx.send("https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
+    await ctx.send(
+        "https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
+
 
 @bot.command()
 async def 누가울어(ctx):
@@ -92,7 +98,7 @@ async def 누가울어(ctx):
 
 @bot.command()
 async def 경매(ctx, num1):
-    icon_url = str("https://cdn.discordapp.com/attachments/1010932575403003974/1010932610173780028/unknown.png")
+    icon_gold_url = str("https://cdn.discordapp.com/attachments/1010932575403003974/1010932610173780028/unknown.png")
     party_gold_4 = int(num1) * 0.95 * 3 / 4
     gold_4 = party_gold_4 - party_gold_4 * 0.1
 
@@ -100,7 +106,7 @@ async def 경매(ctx, num1):
     gold_8 = party_gold_8 - party_gold_8 * 0.1
 
     embed = discord.Embed(title="경매 계산기", description="가격 약간 다름", colour=0x008080)
-    embed.set_thumbnail(url=icon_url)
+    embed.set_thumbnail(url=icon_gold_url)
     embed.add_field(name="인원수", value=4, inline=True)
     embed.add_field(name="선점 입찰가", value=int(gold_4), inline=True)
     embed.add_field(name="N빵 입찰가", value=int(party_gold_4), inline=True)
@@ -111,29 +117,9 @@ async def 경매(ctx, num1):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def 명령어(ctx):
-    icon_Star_url=str("https://cdn.discordapp.com/attachments/1010932575403003974/1010933888287264839/ee78cd98e3010b26.png")
-
-    embed = discord.Embed(title="명령어", description=None, colour=0x008080)
-    embed.set_thumbnail(url=icon_Star_url)
-    embed.add_field(name="회랑 [노말/하드]", value="회랑 개수에 대한 보석 나옴", inline=True)
-    embed.add_field(name="회랑헬 [노말/하드] [헬]", value="노말 + 하드 + 헬 보석 개수 나옴", inline=False)
-    embed.add_field(name="경매 [골드]", value="4, 8인 기준 선점·N빵 입찰가 나옴", inline=False)
-    embed.add_field(name="쿠크", value="쿠크 파티 나옴", inline=False)
-    embed.add_field(name="배위", value="멋진 제리콘", inline=False)
-    embed.add_field(name="누가울어", value="임춘식", inline=False)
-
-    dm_channel = await ctx.message.author.create_dm()
-
-    await dm_channel.send(embed=embed)
-    await dm_channel.send(
-        "https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
-
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.send(f"{ctx.message.author.mention}명령어 몰?루")
-        await ctx.send("https://tenor.com/view/%EB%AA%B0%EB%A3%A8-gif-23066933")
+async def 기능(ctx):
+    view = MyView(ctx)
+    await ctx.send(view=view)
 
 class MyView(View):
 
@@ -165,7 +151,6 @@ class MyView(View):
         embed.add_field(name="회랑 [노말/하드]", value="회랑 개수에 대한 보석 나옴", inline=True)
         embed.add_field(name="회랑헬 [노말/하드] [헬]", value="노말 + 하드 + 헬 보석 개수 나옴", inline=False)
         embed.add_field(name="경매 [골드]", value="4, 8인 기준 선점·N빵 입찰가 나옴", inline=False)
-        embed.add_field(name="쿠크", value="쿠크 파티 나옴", inline=False)
         embed.add_field(name="배위", value="멋진 제리콘", inline=False)
         embed.add_field(name="누가울어", value="임춘식", inline=False)
         dm_channel = await self.ctx.message.author.create_dm()
@@ -205,11 +190,6 @@ class MyView(View):
 
     # async def on_timeout(self):
     #     await self.ctx.send("시간 초과")
-
-@bot.command()
-async def 기능(ctx):
-    view = MyView(ctx)
-    await ctx.send(view=view)
 
 @bot.event
 async def on_command_error(ctx, error):
