@@ -117,6 +117,19 @@ async def 경매(ctx, num1):
     await ctx.send(embed=embed)
 
 @bot.command()
+async def 쿠크(ctx):
+    icon_satan_url = str("https://cdn.discordapp.com/attachments/1010932575403003974/1010933002521563238/unknown.png")
+
+    embed = discord.Embed(title="쿠크 파티", description="쿠크 파티", colour=0x008080)
+    embed.set_thumbnail(url=icon_satan_url)
+    embed.add_field(name="각각두", value="기상 | 알카 | 소서 | 아가", inline=True)
+    embed.add_field(name="워로드", value="홀나 | 기상 | 건슬 | 워로", inline=False)
+    embed.add_field(name="홀홀카", value="인파 | 아가 | 블레 | 리퍼", inline=False)
+    embed.add_field(name="카카멜", value="워로 | 충동 | 아가 | 배마", inline=False)
+
+    await ctx.send(embed=embed)
+
+@bot.command()
 async def 기능(ctx):
     view = MyView(ctx)
     await ctx.send(view=view)
