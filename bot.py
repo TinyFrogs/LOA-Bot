@@ -4,6 +4,7 @@ import math
 import discord
 from discord.ext import commands
 from discord.utils import get
+from discord.ui import Button, View
 
 bot = commands.Bot(command_prefix="$")
 
@@ -82,19 +83,6 @@ async def 회랑(ctx, num1):
     await ctx.send(embed=embeded)
 
 @bot.command()
-async def 쿠크(ctx):
-    icon_satan_url = str("https://cdn.discordapp.com/attachments/1010932575403003974/1010933002521563238/unknown.png")
-
-    embed = discord.Embed(title="쿠크 파티", description="쿠크 파티", colour=0x008080)
-    embed.set_thumbnail(url=icon_satan_url)
-    embed.add_field(name="각각두", value="기상 | 알카 | 소서 | 아가", inline=True)
-    embed.add_field(name="워로드", value="홀나 | 기상 | 건슬 | 워로", inline=False)
-    embed.add_field(name="홀홀카", value="인파 | 아가 | 블레 | 리퍼", inline=False)
-    embed.add_field(name="카카멜", value="워로 | 충동 | 아가 | 배마", inline=False)
-
-    await ctx.send(embed=embed)
-
-@bot.command()
 async def 배위(ctx):
     await ctx.send("https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
 
@@ -141,26 +129,87 @@ async def 명령어(ctx):
     await dm_channel.send(
         "https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
 
-@bot.command()
-async def 서버(ctx):
-    name = str(ctx.guild.name)
-    description = str(ctx.guild.description)
-    id = str(ctx.guild.id)
-    memberCount = str(ctx.guild.member_count)
-    icon = str("https://cdn.discordapp.com/attachments/867400582392971295/984722367072837642/image0.jpg")
-    print("서버4")
-    embed = discord.Embed(
-        title=name + " 서버 정보",
-        description=description,
-        colour=discord.Color.green()
-    )
-    print("서버5")
-    embed.set_thumbnail(url=icon)
-    embed.add_field(name="주인장", value="아줌마", inline=True)
-    embed.add_field(name="서버 ID", value=id, inline=True)
-    embed.add_field(name="멤버 수", value=memberCount, inline=True)
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send(f"{ctx.message.author.mention}명령어 몰?루")
+        await ctx.send("https://tenor.com/view/%EB%AA%B0%EB%A3%A8-gif-23066933")
 
-    await ctx.send(embed=embed)
+class MyView(View):
+
+    def __init__(self, ctx):
+        super().__init__(timeout=60)
+        self.ctx = ctx
+
+    @discord.ui.button(label="쿠크 파티", style=discord.ButtonStyle.danger)
+    async def Satan_button_callback(self, button, interaction):
+        icon_satan_url = str("https://cdn.discordapp.com/attachments/1010932575403003974/1010933002521563238/unknown.png")
+
+        embed = discord.Embed(title="쿠크 파티", description="쿠크 파티", colour=0x008080)
+        embed.set_thumbnail(url=icon_satan_url)
+        embed.add_field(name="각각두", value="기상 | 알카 | 소서 | 아가", inline=True)
+        embed.add_field(name="워로드", value="홀나 | 기상 | 건슬 | 워로", inline=False)
+        embed.add_field(name="홀홀카", value="인파 | 아가 | 블레 | 리퍼", inline=False)
+        embed.add_field(name="카카멜", value="워로 | 충동 | 아가 | 배마", inline=False)
+
+        await interaction.response.edit_message(embed=embed)
+        self.clear_items()
+
+
+    @discord.ui.button(label="명령어", style=discord.ButtonStyle.green, custom_id="two")
+    async def order_button_callback(self, button, interaction):
+        icon_Star_url = str(
+            "https://cdn.discordapp.com/attachments/1010932575403003974/1010933888287264839/ee78cd98e3010b26.png")
+        embed = discord.Embed(title="명령어", description=None, colour=0x008080)
+        embed.set_thumbnail(url=icon_Star_url)
+        embed.add_field(name="회랑 [노말/하드]", value="회랑 개수에 대한 보석 나옴", inline=True)
+        embed.add_field(name="회랑헬 [노말/하드] [헬]", value="노말 + 하드 + 헬 보석 개수 나옴", inline=False)
+        embed.add_field(name="경매 [골드]", value="4, 8인 기준 선점·N빵 입찰가 나옴", inline=False)
+        embed.add_field(name="쿠크", value="쿠크 파티 나옴", inline=False)
+        embed.add_field(name="배위", value="멋진 제리콘", inline=False)
+        embed.add_field(name="누가울어", value="임춘식", inline=False)
+        dm_channel = await self.ctx.message.author.create_dm()
+        await dm_channel.send(embed=embed)
+        await dm_channel.send(
+            "https://media.discordapp.net/attachments/865698548723744769/970330313257537566/802f117f8d9278ac.gif")
+        self.clear_items()
+        await interaction.response.edit_message(view=self)
+
+    @discord.ui.button(label="서버 상세", style=discord.ButtonStyle.secondary)
+    async def hos_button_callback(self, button, interaction):
+        name = str(self.ctx.guild.name)
+        description = str(self.ctx.guild.description)
+        owner = str(self.ctx.guild.owner)
+        id = str(self.ctx.guild.id)
+        memberCount = str(self.ctx.guild.member_count)
+        icon = str("https://cdn.discordapp.com/attachments/867400582392971295/984722367072837642/image0.jpg")
+        embed = discord.Embed(
+            title=name + " 서버 정보",
+            description=description,
+            colour=discord.Color.green()
+        )
+        embed.set_thumbnail(url=icon)
+        embed.add_field(name="주인장", value=owner, inline=True)
+        embed.add_field(name="서버 ID", value=id, inline=True)
+        embed.add_field(name="멤버 수", value=memberCount, inline=True)
+
+        self.clear_items()
+        await interaction.response.edit_message(embed=embed)
+
+    async def interaction_check(self, interaction) -> bool:
+        if interaction.user != self.ctx.author:
+            await interaction.response.send_message("명령어를 실행한 사람이 아닙니다. ", ephemeral=True)
+            return False
+        else:
+            return True
+
+    # async def on_timeout(self):
+    #     await self.ctx.send("시간 초과")
+
+@bot.command()
+async def 기능(ctx):
+    view = MyView(ctx)
+    await ctx.send(view=view)
 
 @bot.event
 async def on_command_error(ctx, error):
