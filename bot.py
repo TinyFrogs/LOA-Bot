@@ -4,7 +4,7 @@ import math
 import discord
 from discord.ext import commands
 from discord.utils import get
-from discord.ui import Button, View
+from discord.ui import button, View
 
 intents = discord.Intents.all()
 intents.message_content = True
@@ -137,7 +137,7 @@ async def 기능(ctx):
 class MyView(View):
 
     def __init__(self, ctx):
-        super().__init__(timeout=60)
+        super().__init__(timeout=None)
         self.ctx = ctx
 
     @discord.ui.button(label="쿠크 파티", style=discord.ButtonStyle.danger)
