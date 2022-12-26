@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix="$", intents=intents)
 @bot.event
 async def on_ready():
     print("We have logged in as {0.user}".format(bot))
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game("$기능"))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game("$기능/11월 28일 종료"))
 
 
 # 하드 + 헬
