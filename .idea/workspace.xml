@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86f556a6-b861-4156-bef5-7566148c813c" name="변경" comment="">
+    <list default="true" id="86f556a6-b861-4156-bef5-7566148c813c" name="변경" comment="chore: gitIgnore 위치 변경 및 내용 편집">
       <change beforePath="$PROJECT_DIR$/ip 및 암호.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ipAndPassword.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/디스코드 봇코드.txt" beforeDir="false" afterPath="$PROJECT_DIR$/discordBotCode.txt" afterDir="false" />
     </list>
@@ -38,8 +38,16 @@
       <option name="presentableId" value="Default" />
       <updated>1699605118518</updated>
       <workItem from="1699605119924" duration="30000" />
-      <workItem from="1699605163767" duration="122000" />
+      <workItem from="1699605163767" duration="446000" />
     </task>
+    <task id="LOCAL-00001" summary="chore: gitIgnore 위치 변경 및 내용 편집">
+      <created>1699605595837</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699605595837</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -55,5 +63,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: gitIgnore 위치 변경 및 내용 편집" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: gitIgnore 위치 변경 및 내용 편집" />
   </component>
 </project>

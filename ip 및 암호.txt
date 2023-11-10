@@ -1,7 +1,0 @@
-위치 54.180.96.42
-
-암호 E-oEWw(EPB2A@x=Wy$i3EctDmnGp=*!;
-
-windows + R -> mstsc
-
-Administrator
